@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Nave from './companentjs/Nave.js';
+import Nave from './companentjs/Home.js';
 
 function App() {
   return (

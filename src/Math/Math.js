@@ -1,8 +1,10 @@
 import { bignumber, e, identity, matrix } from 'mathjs';
-//var interpolationQuadratic_Poly_linear = require('interpolating-polynomial')
-//const Spline = require('cubic-spline');
+var interpolationQuadratic_Poly_linear = require('interpolating-polynomial')
+const Spline = require('cubic-spline');
+var regression = require('regression')
 const math = require('mathjs');
 function checkEquation (equation){
+
     equation = equation.replaceAll('X','x')
 
     return equation
@@ -113,7 +115,9 @@ export function calFalse(initialEquation ,initialXL,initialXR,initialError){
 
         oldX1 = x1
 
-        arr.push({key : i , iteration : i.toString() ,x1 : x1.toFixed(15).toString() ,error : checkError.toFixed(15).toString()})
+        //arr.push({key : i , iteration : i.toString() ,x1 : x1.toFixed(15).toString() ,error : checkError.toFixed(15).toString()})
+        arr.push(<div> {i}:{x1.toFixed(15).toString()}</div>)
+
         console.log(i.toString())
         console.log(x1.toString())
         console.log(checkError.toString())
@@ -149,7 +153,7 @@ export function calOnepoint(initialEquation ,initialX,initialError){
 
          checkError =  math.abs((X - oldX)/X);
           if(checkError > oldcheckError && i > 3){
-           arr.push({key : i , iteration : "ลู่ออก" ,x : "ลู่ออก" ,error : "ลู่ออก"})
+           //arr.push({key : i , iteration : "ลู่ออก" ,x : "ลู่ออก" ,error : "ลู่ออก"})
              break;
          }
           oldcheckError = checkError;
@@ -157,7 +161,9 @@ export function calOnepoint(initialEquation ,initialX,initialError){
          oldX = X
          
        
-        arr.push({key : i , iteration : i.toString() ,x : X.toFixed(15).toString() ,error : checkError.toFixed(15).toString()})
+        //arr.push({key : i , iteration : i.toString() ,x : X.toFixed(15).toString() ,error : checkError.toFixed(15).toString()})
+        arr.push(<div> {i}: {X.toFixed(15).toString()}</div>)
+        
         console.log(i.toString())
         console.log(X.toString())
         console.log(checkError.toString())
@@ -209,7 +215,9 @@ export function calNewton(initialEquation, initialX, initialError) {
         oldX = X
 
 
-        arr.push({key : i, iteration: i.toString(), x: X.toFixed(15).toString(), error: checkError.toFixed(15).toString() })
+        //arr.push({key : i, iteration: i.toString(), x: X.toFixed(15).toString(), error: checkError.toFixed(15).toString() })
+        arr.push(<div> {i}: {X.toFixed(15).toString()}</div>)
+        
         console.log(i.toString())
         console.log(X.toString())
         console.log(checkError.toString())
@@ -258,7 +266,7 @@ export function calSecant(initialEquation, initialX0,initialX1, initialError) {
 
        
         if (checkError > oldcheckError) {
-            arr.push({ key: i, iteration: "ลู่ออก", x: "ลู่ออก", error: "ลู่ออก" })
+           //arr.push({ key: i, iteration: "ลู่ออก", x: "ลู่ออก", error: "ลู่ออก" })
             break;
         }
         oldcheckError = checkError;
@@ -266,7 +274,8 @@ export function calSecant(initialEquation, initialX0,initialX1, initialError) {
         oldX = x
 
 
-        arr.push({key : i, iteration: i.toString(), x: x.toFixed(15).toString(), error: checkError.toFixed(15).toString() })
+        //arr.push({key : i, iteration: i.toString(), x: x.toFixed(15).toString(), error: checkError.toFixed(15).toString() })
+        arr.push(<div> {i}: {x.toFixed(15).toString()}</div>)
       
         i++
 
@@ -296,7 +305,8 @@ export function calCramer(n, initialMatrix1, initialMatrix2) {
             }
             X[i] = math.divide(math.det(temp_matrix1) , det_matrixA).toFixed(15).toString()
             
-            arr.push({key : i , x : 'X'+(i+1) ,valuex : X[i]})
+            //arr.push({key : i , x : 'X'+(i+1) ,valuex : X[i]})
+            arr.push(<div> x{i+1}: {X[i]}</div>)
             
             temp_matrix1 = copyArray(n,matrix1);
         }
@@ -310,9 +320,6 @@ export function calElimination(n, initialMatrix1, initialMatrix2) {
 
     let matrix1=initialMatrix1
     let matrix2=initialMatrix2
-    
-    
-    
     let arr = []
     let X = []
     
@@ -345,10 +352,11 @@ export function calElimination(n, initialMatrix1, initialMatrix2) {
         sum = sum - matrix1[i][i]
         X[i] = ((matrix1[i][n] - sum)/matrix1[i][i])
         
-    }
-    X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
-
         
+    }
+    //arr.push(<div> x{i}: {X[i]}</div>)
+    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
+
     return arr
 }
 
@@ -405,7 +413,8 @@ export function calJordan(n, initialMatrix1, initialMatrix2) {
       
         
     
-    X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
+    //X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
+    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
 
         
     return arr
@@ -502,7 +511,8 @@ export function calLu(n, initialMatrix1, initialMatrix2) {
     }
     
   
-    X.map((x, i) => arr.push({ key: i, x: 'X' + (i + 1), valuex: x.toFixed(5) }))
+    //X.map((x, i) => arr.push({ key: i, x: 'X' + (i + 1), valuex: x.toFixed(5) }))
+    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
 
 
 
@@ -576,10 +586,12 @@ export function calJacobi(n, initialMatrix1, initialMatrix2,initialError) {
             
         }
        
-    
+        
     }
     for(let i = 0 ; i < n ; i++){
-        arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+        arr.push(<div> x{i}: {resultX[i]}</div>)
+        
     }
      
 
@@ -648,11 +660,10 @@ export function calSeidel(n, initialMatrix1, initialMatrix2,initialError) {
           
             
         }
-       
-    
     }
     for(let i = 0 ; i < n ; i++){
-        arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
+        arr.push(<div> x{i}: {resultX[i]}</div>)
     }
      
 
@@ -732,12 +743,10 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
 
        K++;
          
-        
-        
-        
       
     for(let i = 0 ; i < n ; i++){
-        arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
+        //arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
+        arr.push(<div> x{i}: {X[i]}</div>)
     }
      
 
@@ -746,7 +755,7 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
 }
 }
 
-/*export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
+export function calNewtonInterpolation( initialMatrix1, initialPoint,initialX) {
     let A = initialMatrix1
 
     let P = initialPoint
@@ -768,7 +777,8 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
 
    
 
-    ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
+   //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : findX(X) })
+   ans.push(<div className ="result">f({X})={findX(X)}</div>)
 
    return ans
 }
@@ -847,7 +857,8 @@ export function calLagrange(initialMatrix1,initialPoint,initialX){
 	
 
 
-    ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (b/c).toFixed(5) })
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (b/c).toFixed(5) })
+    ans.push(<div className ="result">f({X}) = {(b/c).toFixed(5)}</div>)
 	
 
     return ans
@@ -892,9 +903,232 @@ export function calSpline(initialMatrix1,initialX){
     const spline = new Spline(xs,ys)
     
 
-    ans.push({key :  1 ,fx : 'f('+X+')' , valuex : spline.at(X) })
-	
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : spline.at(X) })
+    ans.push(<div className ="result" >F({X}) = {spline.at(X)}</div>)
 
     return ans
 
-}*/
+}
+export function calLinear(initialMatrix1, initialX, n) {
+
+    let arr = initialMatrix1
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < 2; j++) {
+            arr[i][j] = parseInt(arr[i][j])
+        }
+    }
+
+    const result = regression.linear(arr);
+    let X = initialX
+    const gradient = parseFloat(result.equation[0]);
+    const yIntercept = parseFloat(result.equation[1]);
+    console.log(arr)
+    console.log(X)
+    console.log(gradient)
+    console.log(yIntercept)
+    let ans = []
+    ans.push(<div className="ontopresult"> คำตอบของการคำนวนคือ</div>)
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : (yIntercept + (gradient*X)).toFixed(5) })
+    ans.push(<div className="result">f({X}) = {(yIntercept + (gradient * X)).toFixed(5)}</div>)
+
+    return ans
+
+}
+
+
+export function calPoly(initialMatrix1, initialX, n) {
+
+    let arr = initialMatrix1
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < 2; j++) {
+            arr[i][j] = parseInt(arr[i][j])
+        }
+    }
+
+
+
+    const result = regression.polynomial(arr);
+    let X = initialX
+    const a0 = parseFloat(result.equation[0]);
+    const a1 = parseFloat(result.equation[1]);
+    const a2 = parseFloat(result.equation[2]);
+    console.log(a0)
+    console.log(a1)
+    console.log(a2)
+
+    let ans = []
+    ans.push(<div className="ontopresult"> คำตอบของการคำนวนคือ</div>)
+    let fx = a0 + (a1 * X) + (a2 * (X * X))
+    //ans.push({key :  1 ,fx : 'f('+X+')' , valuex : fx.toFixed(5) })
+    //ans.push(<div>f({X}) = {fx.toFixed(5)}</div>)
+    ans.push(<div className="result">{'f( ' + X + ' ) = '} {fx.toFixed(5)}</div>)
+    return ans
+
+}
+
+export function calMultiple(initialN, initialMatrix1, initialX1, initialX2, initialX3) {
+
+    let n = initialN;
+    let X1 = initialX1
+    let X2 = initialX2
+    let X3 = initialX3
+    let A = initialMatrix1
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < 4; j++) {
+            A[i][j] = parseInt(A[i][j])
+        }
+    }
+    let x1 = []
+    let x2 = []
+    let x3 = []
+    let y = []
+    let sumx1 = 0
+    let sumx2 = 0
+    let sumx3 = 0
+    let sumy = 0
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < 4; j++) {
+            if (j == 0) {
+                x1.push(A[i][j])
+
+                sumx1 += A[i][j]
+
+            }
+            else if (j == 1) {
+                x2.push(A[i][j])
+
+                sumx2 += A[i][j]
+
+            }
+            else if (j == 2) {
+                x3.push(A[i][j])
+                sumx3 += A[i][j]
+
+            }
+            else if (j == 3) {
+                y.push(A[i][j])
+                sumy += A[i][j]
+
+            }
+        }
+    }
+
+    console.log(x1.toString())
+    console.log(x2.toString())
+    console.log(x3.toString())
+    console.log(y.toString())
+    console.log(sumx1)
+    console.log(sumx2)
+    console.log(sumx3)
+    console.log(sumy)
+    function cal(matrix1, matrix2) {
+        let summ = 0
+        for (let i = 0; i < n; i++) {
+            summ += (matrix1[i] * matrix2[i])
+        }
+        return summ;
+    }
+
+    let Xx = []
+
+    Xx.push(x1)
+    Xx.push(x2)
+    Xx.push(x3)
+    Xx.push(y)
+    let arrSum = []
+    arrSum.push(sumx1)
+    arrSum.push(sumx2)
+    arrSum.push(sumx3)
+    arrSum.push(sumy)
+    let B = []
+
+    for (let i = 0; i < 4; i++) {
+        B.push([])
+        for (let j = 0; j < 4 + 1; j++) {
+
+            if (i == 0 && j == 0) {
+                B[i][j] = 7
+            }
+            else if (i == 0) {
+
+
+
+                B[i][j] = arrSum[j - 1]
+
+
+            }
+            else if (j == 0) {
+                B[i][j] = arrSum[i - 1]
+            }
+            else {
+
+
+                B[i][j] = cal(Xx[i - 1], Xx[j - 1])
+
+
+
+            }
+
+
+
+        }
+
+    }
+    console.log(B)
+
+
+
+    let matrix1 = B
+
+
+
+
+    let arr = []
+    arr.push(<div className="ontopresult"> คำตอบของการคำนวนคือ</div>)
+    let X = []
+
+    for (let i = 0; i < 4; i++) {
+
+        X.push(1)
+    }
+    console.log(matrix1)
+
+    for (let i = 1; i < 4; i++) {
+        for (let j = i; j < 4; j++) {
+
+            let divide = matrix1[i - 1][i - 1]
+            let multi = matrix1[j][i - 1]
+
+            for (let k = i - 1; k < 4 + 1; k++) {
+                matrix1[j][k] = matrix1[j][k] - ((matrix1[i - 1][k] / divide) * multi)
+
+            }
+
+        }
+
+    }
+
+    for (let i = 4 - 1; i >= 0; i--) {
+        let sum = 0;
+        for (let j = 0; j < 4; j++) {
+            sum = sum + matrix1[i][j] * X[j];
+        }
+        sum = sum - matrix1[i][i]
+        X[i] = ((matrix1[i][4] - sum) / matrix1[i][i])
+
+    }
+    console.log(X[0])
+    console.log(X[1])
+    console.log(X[2])
+    console.log(X[3])
+
+
+
+    let fX = X[0] + X[1] * X1 + X[2] * X2 + X[3] * X3
+
+    //arr.push({key :  1 ,fx : 'Y' , valuex : fX.toFixed(5) })
+    arr.push(<div className="result">Y = {fX.toFixed(5)}</div>)
+    return arr
+
+
+}
