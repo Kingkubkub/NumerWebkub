@@ -22,6 +22,7 @@ import Spline from '../INTHERPOLATION/Spline';
 import LinearRegression from '../Regression/LinearRegression';
 import PolynomialRegression from '../Regression/PolynomialRegression';
 import MultiLinearRegression from '../Regression/MultiLinearRegression';
+import Swager from '../SwaggerAp/Swager';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -112,6 +113,7 @@ class Nave extends React.Component {
                                <Route path="/LinearRegression" component={LinearRegression}></Route>
                                <Route path="/PolynomialRegression" component={PolynomialRegression}></Route>
                                <Route path="/MultiLinearRegression" component={MultiLinearRegression}></Route>
+                               <Route path="/Swager" component={Swager}></Route>
                                
 
                                
