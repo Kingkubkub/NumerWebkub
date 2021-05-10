@@ -104,13 +104,16 @@ class Bisection extends React.Component {
                         <h1 className="cho">BISECTION</h1>
                     </div>
                     <div className="bg2">
-                    <ModalPoP 
-                    visible = {this.state.isModalVisible}
-                    onOk = {this.onClickOk}
-                    hasData = {this.state.hasData}
-                    apiData = {this.state.apiData}
-                    onClick = {this.onClickInsert}
-                    />
+              
+                            <ModalPoP 
+                            visible = {this.state.isModalVisible}
+                            onOk = {this.onClickOk}
+                            hasData = {this.state.hasData}
+                            apiData = {this.state.apiData}
+                            onClick = {this.onClickInsert}
+                        />
+              
+                    
 
                     <Button type="primary" onClick={this.onClickExample} className="set">ตัวอย่าง</Button><br/>
 
