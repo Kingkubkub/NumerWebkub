@@ -12,7 +12,7 @@ const config = {
                 "tags":[
                     "API"
                 ],
-                "summary": "ค้นหาโจทย์ทั้งหมดในเรื่อง Root of Equation",
+                "summary": "ค้นหาโจทย์ทั้งหมดในเรื่อง Root of Equation", 
                 "responses": {
                     "200": {
                         "description" : "ทำงานสำเร็จ"
