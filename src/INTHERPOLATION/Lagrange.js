@@ -4,6 +4,7 @@ import React from 'react';
 import { calLagrange } from '../Math/Math';
 import ModalPoP from '../companentjs/ModalPoP';
 import apis from '../API/index';
+import {copyArray} from '../Math/Math';
 
 
 class Lagrange extends React.Component {
@@ -39,9 +40,9 @@ class Lagrange extends React.Component {
         let index = e.currentTarget.getAttribute('name').split('_')
             index = parseInt(index[1])
             this.setState({
-                A: this.state.apiData[index]["matrixA"],
+                A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
                 xS: this.state.apiData[index]["x"],
-                point: this.state.apiData[index]["point"],
+                point: [...this.state.apiData[index]["point"]],
                 n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })
@@ -130,7 +131,7 @@ class Lagrange extends React.Component {
                             onClick = {this.onClickInsert}
                             />
                      
-
+                        <Button type="primary" onClick={this.onClickExample} className="inther">ตัวอย่าง</Button>
                         <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
                         <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
                         <div className="car3">
@@ -145,7 +146,7 @@ class Lagrange extends React.Component {
                         ใส่จุดที่ต้องการ<br/>
                         <Input onChange={this.getpoint} value={this.state.point} /><br/><br/>
 
-                        <Button type="primary" onClick={this.onClickExample} className="set13">ตัวอย่าง</Button><br/><br/><br/>
+                     
                     <Button type="primary" onClick={this.Show} className="set13">Calculate</Button><br/><br/><br/>
 
                     </div>

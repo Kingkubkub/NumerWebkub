@@ -10,7 +10,7 @@ class ModalPoP extends React.Component{
                 <Modal
                     title = 'ตัวอย่าง'
                     visible = {this.props.visible}
-                    onOk = {this.props.onOk}
+                    //onOk = {this.props.onOk}
                     onCancel = {this.props.onOk}
                     footer = {[
                         <Button type = 'primary' onClick={this.props.onOk}>
@@ -21,14 +21,14 @@ class ModalPoP extends React.Component{
                     {this.props.hasData ?
                         this.props.apiData.map((x,i) => (
                             <Row>
-                                <Col span={12}>ข้อที่ {i+1}</Col>
+                                <Col span={12}>ข้อที่ {i+1} {x["equation"]}</Col>
                                 <Col span={12}>
                                     <Button type='primary' name={'insert_' + i} onClick={this.props.onClick}>Insert</Button>
                                 </Col>
                                 <hr/>
                             </Row>
                         ))
-                        : <span style={{fontSize: "25px" , textAlign: "center"}}>กำลังโหลดข้อมูล</span>
+                        : <span style={{fontSize: "25px" , textAlign: "center"}}>ไม่มีข้อมูล</span>
                     }
                 </Modal>
             </div>

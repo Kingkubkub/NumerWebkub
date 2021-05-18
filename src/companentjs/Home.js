@@ -23,6 +23,7 @@ import LinearRegression from '../Regression/LinearRegression';
 import PolynomialRegression from '../Regression/PolynomialRegression';
 import MultiLinearRegression from '../Regression/MultiLinearRegression';
 import Swager from '../SwaggerAp/Swager';
+import Test from '../Test/Test';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -79,6 +80,12 @@ class Nave extends React.Component {
                                     <Menu.Item key="18"><Link to = '/MultiLinearRegression'>MultiLinearRegression</Link></Menu.Item>
                                     
                                 </SubMenu>
+                                <SubMenu key="sub5"title="SWAGER">
+                                    <Menu.Item key="21"><Link to = '/Swager'>SWAGER</Link></Menu.Item>
+                                </SubMenu>
+                                <SubMenu key="sub6"title="TEST">
+                                    <Menu.Item key="20"><Link to = '/Test'>Test</Link></Menu.Item>
+                                </SubMenu>
                             </Menu>
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
@@ -114,8 +121,7 @@ class Nave extends React.Component {
                                <Route path="/PolynomialRegression" component={PolynomialRegression}></Route>
                                <Route path="/MultiLinearRegression" component={MultiLinearRegression}></Route>
                                <Route path="/Swager" component={Swager}></Route>
-                               
-
+                               <Route path="/Test" component={Test}></Route>
                                
                             </Content>
                         </Layout>

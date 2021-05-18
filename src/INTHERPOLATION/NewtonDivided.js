@@ -4,6 +4,7 @@ import React from 'react';
 import { calNewtonInterpolation } from '../Math/Math';
 import apis from '../API/index';
 import ModalPoP from '../companentjs/ModalPoP';
+import {copyArray} from '../Math/Math';
 
 
 class NewtonDivided extends React.Component {
@@ -25,7 +26,7 @@ class NewtonDivided extends React.Component {
         await apis.getInter().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+       
     }
 
     onClickExample = e =>{
@@ -35,13 +36,14 @@ class NewtonDivided extends React.Component {
         this.setState({isModalVisible: true})
     }
 
+
     onClickInsert = e =>{
         let index = e.currentTarget.getAttribute('name').split('_')
             index = parseInt(index[1])
             this.setState({
-                A: this.state.apiData[index]["matrixA"],
+                A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
                 xS: this.state.apiData[index]["x"],
-                point: this.state.apiData[index]["point"],
+                point: [...this.state.apiData[index]["point"]],
                 n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })
@@ -132,7 +134,8 @@ class NewtonDivided extends React.Component {
                         </div>
                         
 
-                        <Button type="primary" onClick={this.getNum} className="inther" >เพิ่ม</Button>
+                        <Button type="primary" onClick={this.onClickExample} className="inther">ตัวอย่าง</Button>
+                        <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
                         <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
                         <div className="car3">
                             <Inputmaxtic className="SP" n={this.state.n} onChange={this.MaxticA} value={this.state.A}/>
@@ -145,7 +148,7 @@ class NewtonDivided extends React.Component {
                         ใส่จุดที่ต้องการ<br/>
                         <Input onChange={this.getpoint} value={this.state.point} /><br/><br/>
 
-                    <Button type="primary" onClick={this.onClickExample} className="set13">ตัวอย่าง</Button><br/><br/><br/>
+                    
                     <Button type="primary" onClick={this.Show} className="set13">Calculate</Button><br/><br/><br/>
                     
 

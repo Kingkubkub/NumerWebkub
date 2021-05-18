@@ -1,7 +1,7 @@
 
 FROM node:14.16
 
-RUN mkdir /usr/src/app
+RUN mkdir /usr/src/app  
 WORKDIR /usr/src/app/client
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH

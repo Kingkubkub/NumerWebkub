@@ -26,10 +26,10 @@ class Bisection extends React.Component {
     async getData()
     {
         let tempData = null
-        await apis.getRoot().then(res => {tempData = res.data})
+        await apis.getRoot().then(res => {tempData = res.data })
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+     
     }
     onClickExample = e =>{
         if(!this.state.hasData){
@@ -126,11 +126,7 @@ class Bisection extends React.Component {
                         <Button type="primary" onClick={this.Show} className="set">Calculate</Button>
                     </div>
                 </div ><br />
-                <div className="iteration">
 
-                    <h1 className="h1x">ANSWEAR</h1>
-                    {this.state.re[this.state.re.length-1]}
-                </div>
                 <div className="iteration">
                     <h1 className="h1x">ITERATION</h1>
                     {this.state.re}

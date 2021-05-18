@@ -2,7 +2,9 @@ import { InputmaxticMulti } from './inputregression';
 import { Col, Row, Button,Input } from 'antd';
 import React from 'react';
 import { calMultiple } from '../Math/Math';
-
+import ModalPoP from '../companentjs/ModalPoP';
+import apis from '../API/index';
+import {copyArray} from '../Math/Math';
 
 class MultiLinearRegression extends React.Component {
 
@@ -12,7 +14,69 @@ class MultiLinearRegression extends React.Component {
         x1: '',
         x2: '',
         x3: '',
-        n: 2
+        n: 2,
+        isModalVisible: false,
+        hasData: false,
+        apiData: [],
+    }
+    async getData()
+    {
+        let tempData = null
+        await apis.getRegession().then(res => {tempData = res.data})
+        this.setState({apiData: tempData})
+        this.setState({hasData: true})
+        /* console.log(tempData); */
+    }
+
+    onClickExample = e =>{
+        if(!this.state.hasData){
+            this.getData()
+        }
+        this.setState({isModalVisible: true})
+    }
+
+    onClickInsert = e =>{
+        let index = e.currentTarget.getAttribute('name').split('_')
+            index = parseInt(index[1])
+            this.setState({
+                A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
+                xS: this.state.apiData[index]["x"],
+                point: [...this.state.apiData[index]["point"]],
+                n: this.state.apiData[index]["n"],
+                isModalVisible: false
+            })
+    }
+
+    onClickOk = e =>{
+        this.setState(
+
+            {isModalVisible: false}
+        )
+    }
+    getNum = e => {
+
+        if (this.state.n < 6) {
+
+            let arr= this.state.A;
+            arr.push([])
+            this.setState(
+
+                { n: this.state.n + 1,
+                A :arr
+                }
+
+            );
+        }
+
+    }
+
+    getNumD = e => {
+        if (this.state.n > 2) {
+            this.setState(
+                { n: this.state.n - 1 }
+            );
+
+        }
     }
 
     getx1 = e =>{
@@ -89,22 +153,31 @@ class MultiLinearRegression extends React.Component {
                 <div className="car2 car">
                     <h1 className="intherh">MULTILINEAR REGRESSION</h1>
                     <div className="car2">
+                    <ModalPoP 
+                            visible = {this.state.isModalVisible}
+                            onOk = {this.onClickOk}
+                            hasData = {this.state.hasData}
+                            apiData = {this.state.apiData}
+                            onClick = {this.onClickInsert}
+                            />
 
-                        <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
-                        <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
+                    <Button type="primary" onClick={this.onClickExample} className="inther" >ตัวอย่าง</Button>
+                    <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
+                    <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
                         <div className="car34">
-                            <InputmaxticMulti className="SP" n={this.state.n} onChange={this.MaxticA} />
+                            <InputmaxticMulti className="SP" n={this.state.n} onChange={this.MaxticA} value={this.state.A}/>
                         </div>
                     </div>
                     <div>
 
-                    <Button type="primary" onClick={this.Show} className="set13">Calculate</Button><br/><br/><br/>
+                    
                         ค่า X1 ที่ต้องการ <br/>
-                        <Input onChange={this.getx1} /><br/>
+                        <Input onChange={this.getx1} value={this.state.x1}/><br/>
                         ค่า X2 ที่ต้องการ <br/>
-                        <Input onChange={this.getx2} /><br/>
+                        <Input onChange={this.getx2} value={this.state.x2}/><br/>
                         ค่า X3 ที่ต้องการ <br/>
-                        <Input onChange={this.getx3} /><br/>
+                        <Input onChange={this.getx3} value={this.state.x3}/><br/>
+                        <Button type="primary" onClick={this.Show} className="set13">Calculate</Button><br/>
 
                     </div>
                     <br />

@@ -9,7 +9,7 @@ function checkEquation (equation){
 
     return equation
 }
-function copyArray(n,matrix1){
+export function copyArray(n,matrix1){
    let arr = []
     for(let i = 0;i < n ; i++){
         arr.push([])
@@ -355,7 +355,7 @@ export function calElimination(n, initialMatrix1, initialMatrix2) {
         
     }
     //arr.push(<div> x{i}: {X[i]}</div>)
-    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
+    X.map((x,i) => arr.push(<div> x{i+1}: {X[i]}</div>))
 
     return arr
 }
@@ -414,7 +414,7 @@ export function calJordan(n, initialMatrix1, initialMatrix2) {
         
     
     //X.map((x,i) => arr.push({key : i , x : 'X'+(i+1) , valuex : x.toFixed(5)}))
-    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
+    X.map((x,i) => arr.push(<div> x{i+1}: {X[i]}</div>))
 
         
     return arr
@@ -512,7 +512,7 @@ export function calLu(n, initialMatrix1, initialMatrix2) {
     
   
     //X.map((x, i) => arr.push({ key: i, x: 'X' + (i + 1), valuex: x.toFixed(5) }))
-    X.map((x,i) => arr.push(<div> x{i}: {X[i]}</div>))
+    X.map((x,i) => arr.push(<div> x{i+1}: {X[i]}</div>))
 
 
 
