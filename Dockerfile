@@ -7,7 +7,7 @@ WORKDIR /usr/src/app/client
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY . /usr/src/app
 RUN npm install
-RUN npm install react-scripts -g
+
 
 EXPOSE 3000
 
