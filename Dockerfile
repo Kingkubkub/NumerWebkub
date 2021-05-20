@@ -11,4 +11,4 @@ RUN npm install react-scripts -g
 
 EXPOSE 3000
 
-CMD ["npm" , "start"]docker build -t web .
+CMD ["npm" , "start"] 
