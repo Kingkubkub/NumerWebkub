@@ -23,7 +23,8 @@ class LinearRegression extends React.Component {
         await apis.getRegession().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
+        
     }
 
     onClickExample = e =>{
@@ -39,7 +40,7 @@ class LinearRegression extends React.Component {
             this.setState({
                 A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
                 xS: this.state.apiData[index]["x"],
-                point: [...this.state.apiData[index]["point"]],
+                
                 n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })
@@ -144,7 +145,7 @@ class LinearRegression extends React.Component {
                             hasData = {this.state.hasData}
                             apiData = {this.state.apiData}
                             onClick = {this.onClickInsert}
-                            />
+                    />
                     <Button type="primary" onClick={this.onClickExample} className="inther" >ตัวอย่าง</Button>
                     <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
                     <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />

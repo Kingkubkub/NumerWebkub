@@ -25,7 +25,7 @@ class Secant extends React.Component {
         await apis.getRoot().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
     }
     onClickExample = e =>{
         if(!this.state.hasData){

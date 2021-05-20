@@ -25,7 +25,7 @@ class MultiLinearRegression extends React.Component {
         await apis.getRegession().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
     }
 
     onClickExample = e =>{
@@ -40,8 +40,9 @@ class MultiLinearRegression extends React.Component {
             index = parseInt(index[1])
             this.setState({
                 A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                xS: this.state.apiData[index]["x"],
-                point: [...this.state.apiData[index]["point"]],
+                x1: this.state.apiData[index]["x1"],
+                x2: this.state.apiData[index]["x2"],
+                x3: this.state.apiData[index]["x3"],
                 n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })

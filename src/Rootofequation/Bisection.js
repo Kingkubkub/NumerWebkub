@@ -26,7 +26,8 @@ class Bisection extends React.Component {
     async getData()
     {
         let tempData = null
-        await apis.getRoot().then(res => {tempData = res.data })
+        await apis.getRoot().then(res => {tempData = res.data 
+        console.log(tempData)})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
      
@@ -105,7 +106,7 @@ class Bisection extends React.Component {
                     </div>
                     <div className="bg2">
               
-                            <ModalPoP 
+                        <ModalPoP 
                             visible = {this.state.isModalVisible}
                             onOk = {this.onClickOk}
                             hasData = {this.state.hasData}

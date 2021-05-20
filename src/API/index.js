@@ -9,6 +9,8 @@ const getmatrix = () => api.get('/matrix')
 const getInter = () => api.get('/interpolation')
 const getRegession = () => api.get('/regression')
 
+
+
 const apis = {
     getRoot,getmatrix,getInter,getRegession
 }

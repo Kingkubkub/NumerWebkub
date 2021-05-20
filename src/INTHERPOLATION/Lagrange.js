@@ -26,7 +26,7 @@ class Lagrange extends React.Component {
         await apis.getInter().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
     }
 
     onClickExample = e =>{

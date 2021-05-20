@@ -23,7 +23,8 @@ class PolynomialRegression extends React.Component {
         await apis.getRegession().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
+        
     }
 
     onClickExample = e =>{
@@ -39,7 +40,6 @@ class PolynomialRegression extends React.Component {
             this.setState({
                 A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
                 xS: this.state.apiData[index]["x"],
-                point: [...this.state.apiData[index]["point"]],
                 n: this.state.apiData[index]["n"],
                 isModalVisible: false
             })

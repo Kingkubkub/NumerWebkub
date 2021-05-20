@@ -24,7 +24,7 @@ class JacobiIteration extends React.Component{
             await apis.getmatrix().then(res => {tempData = res.data})
             this.setState({apiData: tempData})
             this.setState({hasData: true})
-            /* console.log(tempData); */
+            
         }
     
         onClickExample = e =>{
@@ -39,8 +39,8 @@ class JacobiIteration extends React.Component{
                 index = parseInt(index[1])
                 this.setState({
                     A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                    xS: this.state.apiData[index]["x"],
-                    point: [...this.state.apiData[index]["point"]],
+                    B: this.state.apiData[index]["matrixB"],
+                    ERR: this.state.apiData[index]["error"],
                     n: this.state.apiData[index]["n"],
                     isModalVisible: false
                 })

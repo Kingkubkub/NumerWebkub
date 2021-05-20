@@ -13,7 +13,10 @@ class Spline extends React.Component {
         A: [[],[]],
         Re: "",
         xS: '',
-        n: 2
+        n: 2,
+        isModalVisible: false,
+        hasData: false,
+        apiData: [],
     }
 
     async getData()
@@ -22,7 +25,7 @@ class Spline extends React.Component {
         await apis.getInter().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        /* console.log(tempData); */
+        
     }
 
     onClickExample = e =>{
@@ -117,7 +120,7 @@ class Spline extends React.Component {
                             hasData = {this.state.hasData}
                             apiData = {this.state.apiData}
                             onClick = {this.onClickInsert}
-                            />
+                        />
                      
 
                      <Button type="primary" onClick={this.onClickExample} className="inther">ตัวอย่าง</Button>
