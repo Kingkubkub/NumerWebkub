@@ -2,7 +2,7 @@ import { InputmaxticMulti } from './inputregression';
 import { Col, Row, Button,Input } from 'antd';
 import React from 'react';
 import { calMultiple } from '../Math/Math';
-import ModalPoP from '../companentjs/ModalPoP';
+
 import apis from '../API/index';
 import {copyArray} from '../Math/Math';
 
@@ -25,6 +25,7 @@ class MultiLinearRegression extends React.Component {
         await apis.getRegession().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
+        this.onInsert()
         
     }
 
@@ -32,19 +33,18 @@ class MultiLinearRegression extends React.Component {
         if(!this.state.hasData){
             this.getData()
         }
-        this.setState({isModalVisible: true})
+       
     }
 
-    onClickInsert = e =>{
-        let index = e.currentTarget.getAttribute('name').split('_')
-            index = parseInt(index[1])
+    onInsert(){
+
             this.setState({
-                A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                x1: this.state.apiData[index]["x1"],
-                x2: this.state.apiData[index]["x2"],
-                x3: this.state.apiData[index]["x3"],
-                n: this.state.apiData[index]["n"],
-                isModalVisible: false
+                A: copyArray(this.state.apiData[2].n,this.state.apiData[2].matrixA),
+                x1: this.state.apiData[2].x1,
+                x2: this.state.apiData[2].x2,
+                x3: this.state.apiData[2].x3,
+                n: this.state.apiData[2].n,
+
             })
     }
 
@@ -135,6 +135,9 @@ class MultiLinearRegression extends React.Component {
 
         let I = e.target.name.split(" ");
         this.state.A[parseInt(I[0])][parseInt(I[1])] = e.target.value;
+        this.setState(
+            { A: this.state.A}
+        )
 
     }
 
@@ -154,18 +157,15 @@ class MultiLinearRegression extends React.Component {
                 <div className="car2 car">
                     <h1 className="intherh">MULTILINEAR REGRESSION</h1>
                     <div className="car2">
-                    <ModalPoP 
-                            visible = {this.state.isModalVisible}
-                            onOk = {this.onClickOk}
-                            hasData = {this.state.hasData}
-                            apiData = {this.state.apiData}
-                            onClick = {this.onClickInsert}
-                            />
+
 
                     <Button type="primary" onClick={this.onClickExample} className="inther" >ตัวอย่าง</Button>
                     <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
                     <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
                         <div className="car34">
+                        <div>
+                            <p className="xy">ใส่ค่า X , Y</p>
+                        </div>
                             <InputmaxticMulti className="SP" n={this.state.n} onChange={this.MaxticA} value={this.state.A}/>
                         </div>
                     </div>

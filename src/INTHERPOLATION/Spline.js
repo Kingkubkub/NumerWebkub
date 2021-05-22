@@ -3,7 +3,7 @@ import { Col, Row, Button,Input } from 'antd';
 import React from 'react';
 import { calSpline } from '../Math/Math';
 import apis from '../API/index';
-import ModalPoP from '../companentjs/ModalPoP';
+
 import {copyArray} from '../Math/Math';
 
 
@@ -14,7 +14,7 @@ class Spline extends React.Component {
         Re: "",
         xS: '',
         n: 2,
-        isModalVisible: false,
+       
         hasData: false,
         apiData: [],
     }
@@ -25,6 +25,7 @@ class Spline extends React.Component {
         await apis.getInter().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
+        this.onInsert();
         
     }
 
@@ -32,18 +33,16 @@ class Spline extends React.Component {
         if(!this.state.hasData){
             this.getData()
         }
-        this.setState({isModalVisible: true})
+        
     }
 
-    onClickInsert = e =>{
-        let index = e.currentTarget.getAttribute('name').split('_')
-            index = parseInt(index[1])
+    onInsert(){
+
             this.setState({
-                A: copyArray(this.state.apiData[index]["n"],this.state.apiData[index]["matrixA"]),
-                xS: this.state.apiData[index]["x"],
-                point: [...this.state.apiData[index]["point"]],
-                n: this.state.apiData[index]["n"],
-                isModalVisible: false
+                A: copyArray(this.state.apiData[0].n,this.state.apiData[0].matrixA),
+                xS: this.state.apiData[0].x,
+                n: this.state.apiData[0].n,
+            
             })
     }
 
@@ -95,6 +94,9 @@ class Spline extends React.Component {
 
         let I = e.target.name.split(" ");
         this.state.A[parseInt(I[0])][parseInt(I[1])] = e.target.value;
+        this.setState(
+            { A: this.state.A}
+        )
 
     }
 
@@ -114,19 +116,15 @@ class Spline extends React.Component {
                 <div className="car2 car">
                     <h1 className="intherh">SPLINE INTTHERPOLATION</h1>
                     <div className="car2">
-                    <ModalPoP 
-                            visible = {this.state.isModalVisible}
-                            onOk = {this.onClickOk}
-                            hasData = {this.state.hasData}
-                            apiData = {this.state.apiData}
-                            onClick = {this.onClickInsert}
-                        />
-                     
+
 
                      <Button type="primary" onClick={this.onClickExample} className="inther">ตัวอย่าง</Button>
                         <Button type="primary" onClick={this.getNum} className="inther">เพิ่ม</Button>
                         <Button type="primary" onClick={this.getNumD} className="inther">ลด</Button><br />
                         <div className="car3">
+                        <div>
+                            <p className="xy">ใส่ค่า X , Y</p>
+                        </div>
                             <Inputmaxtic className="SP" n={this.state.n} onChange={this.MaxticA} value={this.state.A}/>
                         </div>
                     </div>

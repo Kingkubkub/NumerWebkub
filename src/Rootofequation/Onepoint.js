@@ -3,20 +3,22 @@ import { Input } from 'antd';
 import '../App.css';
 import { Button } from 'antd';
 import { calOnepoint } from '../Math/Math';
-import ModalPoP from '../companentjs/ModalPoP';
+
 import apis from '../API/index';
 
 
 class Onepoint extends React.Component {
     state = {
-        Equation: '',
-        X: '',
-        E: '',
+        Equation: "",
+        X: "",
+        E: "",
         re: [],
-        rel: [],
-        isModalVisible: false,
-        hasData: false,
+
         apiData: [],
+        hasData: false,
+
+
+
     };
     async getData()
     {
@@ -24,31 +26,25 @@ class Onepoint extends React.Component {
         await apis.getRoot().then(res => {tempData = res.data})
         this.setState({apiData: tempData})
         this.setState({hasData: true})
-        
+        this.onInsert()
+     
     }
+
     onClickExample = e =>{
         if(!this.state.hasData){
             this.getData()
         }
-        this.setState({isModalVisible: true})
+       
     }
 
-    onClickInsert = e =>{
-        let index = e.currentTarget.getAttribute('name').split('_')
-            index = parseInt(index[1])
+    onInsert(){
+      
             this.setState({
-                Equation: this.state.apiData[index]["equation"],
-                X: this.state.apiData[index]["initial_x"],
-                E: this.state.apiData[index]["error"],
-                isModalVisible: false
+                Equation: this.state.apiData[3].equation,
+                X: this.state.apiData[3].initial_x,
+                E: this.state.apiData[3].error,
+     
             })
-    }
-
-    onClickOk = e =>{
-        this.setState(
-
-            {isModalVisible: false}
-        )
     }
 
     getEquation = e => {
@@ -86,13 +82,7 @@ class Onepoint extends React.Component {
                         <h1 className="cho">ONE POINT</h1>
                     </div>
                     <div className="bg2">
-                    <ModalPoP 
-                            visible = {this.state.isModalVisible}
-                            onOk = {this.onClickOk}
-                            hasData = {this.state.hasData}
-                            apiData = {this.state.apiData}
-                            onClick = {this.onClickInsert}
-                        />
+
                         <Button type="primary" onClick={this.onClickExample} className="set">ตัวอย่าง</Button><br/>
                         Equation: <Input onChange={this.getEquation} value={this.state.Equation}/><br />
                         <label className="label1">X  :: </label><Input onChange={this.getX} value={this.state.X}/><br />
