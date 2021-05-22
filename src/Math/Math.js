@@ -10,10 +10,10 @@ function checkEquation (equation){
     return equation
 }
 export function copyArray(n,matrix1){
-   let arr = []
+   let arr = []                                  //[]         
     for(let i = 0;i < n ; i++){
-        arr.push([])
-        arr[i] = [].concat(matrix1[i])
+        arr.push([])                            //[[]]
+        arr[i] = [...matrix1[i]]               //[[-2,3,1],[],[],[]]     
     }
     return arr;
 
@@ -318,8 +318,8 @@ export function calCramer(n, initialMatrix1, initialMatrix2) {
 
 export function calElimination(n, initialMatrix1, initialMatrix2) {
 
-    let matrix1=initialMatrix1
-    let matrix2=initialMatrix2
+    let matrix1= copyArray(n,initialMatrix1)
+    let matrix2=[...initialMatrix2]
     let arr = []
     let X = []
     
@@ -363,8 +363,8 @@ export function calElimination(n, initialMatrix1, initialMatrix2) {
 
 export function calJordan(n, initialMatrix1, initialMatrix2) {
 
-    let matrix1=initialMatrix1
-    let matrix2=initialMatrix2
+    let matrix1=copyArray(n,initialMatrix1)
+    let matrix2=[...initialMatrix2]
     
     
     
@@ -590,7 +590,7 @@ export function calJacobi(n, initialMatrix1, initialMatrix2,initialError) {
     }
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
-        arr.push(<div> x{i}: {resultX[i]}</div>)
+        arr.push(<div> x{i+1}: {resultX[i]}</div>)
         
     }
      
@@ -663,7 +663,7 @@ export function calSeidel(n, initialMatrix1, initialMatrix2,initialError) {
     }
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : resultX[i].toFixed(5)})
-        arr.push(<div> x{i}: {resultX[i]}</div>)
+        arr.push(<div> x{i+1}: {resultX[i]}</div>)
     }
      
 
@@ -746,7 +746,7 @@ export function calConjugate(n, initialMatrix1, initialMatrix2,initialError) {
       
     for(let i = 0 ; i < n ; i++){
         //arr.push({key : i , x : 'X'+(i+1) , valuex : X[i].toFixed(5)})
-        arr.push(<div> x{i}: {X[i]}</div>)
+        arr.push(<div> x{i+1}: {X[i]}</div>)
     }
      
 
