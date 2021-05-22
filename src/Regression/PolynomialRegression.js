@@ -41,9 +41,9 @@ class PolynomialRegression extends React.Component {
     onInsert(){
        
             this.setState({
-                A: copyArray(this.state.apiData[3].n,this.state.apiData[3].matrixA),
-                xS: this.state.apiData[3].x,
-                n: this.state.apiData[3].n,
+                A: copyArray(this.state.apiData[0].n,this.state.apiData[0].matrixA),
+                xS: this.state.apiData[0].x,
+                n: this.state.apiData[0].n,
                 
             })
     }
