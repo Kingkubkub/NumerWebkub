@@ -13,7 +13,7 @@ class GaussJordan extends React.Component{
         B: [],
         Re: '',
         n: 2,
-
+        
         hasData: false,
         apiData: [],
     }

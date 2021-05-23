@@ -60,6 +60,7 @@ class CarmerRule extends React.Component {
 
             );
         }
+        
 
     }
     

@@ -1,14 +1,11 @@
-
 FROM node:14.16
 
-RUN mkdir /usr/src/app  
-WORKDIR /usr/src/app/client
-
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app/web
 COPY . /usr/src/app
 RUN npm install
 
 
 EXPOSE 3000
 
-CMD ["npm" , "start"] 
+CMD ["npm" , "start"]
